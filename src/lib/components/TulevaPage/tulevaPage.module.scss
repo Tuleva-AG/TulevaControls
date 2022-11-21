@@ -1,0 +1,77 @@
+@import './../../styles/variables.scss';
+
+.header {
+    display: table;
+    width: 100%;
+    border: 1px solid $color-border;
+    background-color: $color-white;
+    padding: 8px 16px;
+
+    margin-bottom: 4px;
+
+    .headerInner {
+        display: table-row;
+        .headerCaption {
+            padding: 8px 16px;
+            width: calc(100% - 75px);
+
+            display: table-cell;
+
+            h2 {
+                margin: 0;
+            }
+        }
+        .headerButtons {
+            width: 75px;
+            display: table-cell;
+            text-align: right;
+            vertical-align: middle;
+        }
+    }
+}
+
+.listItem {
+    background-color: $color-white;
+    display: table;
+
+    table-layout: fixed;
+    width: 100%;
+}
+.filterOptions {
+    margin-bottom: 4px;
+}
+
+.viewTable {
+    display: grid;
+    width: calc(100% - 75px);
+    padding: 0px 16px;
+
+    .viewRow {
+        display: grid;
+        width: 100%;
+        div {
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .viewTable {
+        display: table;
+        table-layout: fixed;
+        width: calc(100% - 75px);
+        padding: 0px 16px;
+
+        .viewRow {
+            display: table-row;
+            width: 100%;
+            div {
+                display: table-cell;
+                width: 20%;
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+    }
+}

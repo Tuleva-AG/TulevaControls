@@ -1,0 +1,73 @@
+@import './../../styles/variables.scss';
+
+.header {
+    display: table;
+    width: 100%;
+    border: 1px solid $color-border;
+    background-color: $color-white;
+    padding: 8px 16px 8px 0px;
+    // border-spacing: 0px 5px;
+
+    margin-bottom: 4px;
+
+    .headerInner {
+        display: table-row;
+        .headerCaption {
+            padding: 8px 16px;
+            width: calc(100% - 75px);
+
+            display: table-cell;
+
+            h2 {
+                margin: 0;
+                display: table-cell;
+            }
+        }
+        .headerSubline {
+            display: table-cell;
+            float: left;
+            padding-left: 16px;
+            height: 34px;
+            padding-top: 6px;
+            font-weight: bold;
+        }
+
+        .headerSummary {
+            display: table-cell;
+            float: right;
+            font-weight: bold;
+            height: 34px;
+            padding-top: 6px;
+        }
+
+        .headerButtons {
+            width: 150px;
+            display: flex;
+            float: right;
+            align-items: center;
+            justify-content: flex-end;
+
+            button {
+                margin-right: 4px;
+            }
+        }
+    }
+}
+
+/* für Desktop & Tablet */
+
+@media only screen and (min-width: 600px) {
+    .header {
+        .headerInner {
+            .headerButtons {
+                width: 150px;
+            }
+        }
+    }
+}
+
+@media print {
+    .header {
+        display: none;
+    }
+}
