@@ -1,0 +1,34 @@
+@import "./../../styles/variables.scss";
+@import "./../../styles/controls.scss";
+
+.display:hover {
+  color: $color-hover;
+}
+
+.viewTable {
+  display: table;
+  width: 100%;
+
+  .viewRow {
+    display: table-row;
+    width: 100%;
+  }
+}
+
+/* für Desktop & Tablet */
+
+@media only screen and (min-width: 600px) {
+  .viewTable {
+    display: table;
+    width: 100%;
+
+    .viewRow {
+      display: table-row;
+      width: 100%;
+      div {
+        display: table-cell;
+        width: 25%;
+      }
+    }
+  }
+}

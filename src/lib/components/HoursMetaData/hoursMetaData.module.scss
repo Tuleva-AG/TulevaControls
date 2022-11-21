@@ -1,0 +1,22 @@
+.medaDataTable {
+  display: table;
+  width: 100%;
+  height: 40px;
+  // border: 1px solid $color-border;
+  padding-left: 8px;
+  float: left;
+  // background-color: ghostwhite;
+  .medaDataRow {
+    display: table-row;
+    div {
+      display: table-cell;
+      white-space: nowrap;
+      font-size: 0.9em;
+      font-family: "Segoe UI", "Segoe", Tahoma, Helvetica, Arial, sans-serif;
+      text-align: left;
+    }
+  }
+  .medaDataLabel {
+    width: 10%;
+  }
+}

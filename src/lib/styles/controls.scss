@@ -1,0 +1,122 @@
+@import 'variables.scss';
+
+/* CSS ab 360 px Breite */
+
+$labelWidth: 150px;
+$controlWidth: calc(100% - 150px);
+
+.display {
+    cursor: pointer;
+}
+
+.editorInner {
+    display: table-row;
+
+    width: 100%;
+    .inputArea {
+        width: calc(100% - 45px);
+        display: table-cell;
+        padding: 8px 16px;
+    }
+    .buttonArea {
+        width: 40px;
+        display: table-cell;
+        vertical-align: top;
+
+        .buttonAreaInner {
+            text-align: right;
+            button {
+                margin-top: 4px;
+                margin-right: 4px;
+            }
+        }
+    }
+}
+
+.labeledControl {
+    width: 100%;
+    margin: $margin-input;
+
+    .label {
+        width: 100%;
+        border: 1px solid $color-border;
+        border-bottom: 0;
+        float: left;
+        height: 40px;
+        background-color: $color-labelBg;
+        padding: 8px;
+    }
+
+    .control {
+        width: 100%;
+        float: right;
+
+        .select {
+            width: 100%;
+        }
+    }
+
+    .readOnlyControl {
+        width: 100%;
+        border: 1px solid $color-border;
+        float: left;
+        height: 40px;
+        background-color: $color-labelBg;
+        padding: 8px;
+    }
+}
+
+/* für Desktop & Tablet */
+
+@media only screen and (min-width: 600px) {
+    .editorInner {
+        .inputArea {
+            width: 100%;
+        }
+        .buttonArea {
+            width: 75px;
+            display: table-cell;
+
+            .buttonAreaInner {
+                button {
+                    margin-top: 4px;
+                    margin-right: 4px;
+                }
+            }
+        }
+    }
+
+    .labeledControl {
+        width: 100%;
+        margin: $margin-input;
+
+        .label {
+            width: $labelWidth;
+            border: 1px solid $color-border;
+            border-right: 0;
+            float: left;
+            height: 40px;
+            background-color: $color-labelBg;
+            padding: 8px;
+        }
+
+        .borderedLabel {
+            width: $labelWidth;
+            border: 1px solid $color-border;
+            float: left;
+            height: 40px;
+            background-color: $color-labelBg;
+            padding: 8px;
+        }
+        .control {
+            width: $controlWidth;
+            float: right;
+            .select {
+                width: 100%;
+            }
+            > [class*='ant-checkbox-wrapper'] {
+                margin: 10px;
+            }
+        }
+    }
+}
