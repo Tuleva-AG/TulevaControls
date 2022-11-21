@@ -1,7 +1,7 @@
 import moment from "moment";
 import React from "react";
 import { IBaseEntity } from "../../types/baseEntity";
-import styles from "./hoursMetaData.module.scss";
+import styles from "./tulevaMetaData.module.scss";
 
 export interface IHoursMetaDataProps {
   item: IBaseEntity;
@@ -14,11 +14,12 @@ export interface IHoursMetaDataProps {
 const HoursMetaData: React.FC<IHoursMetaDataProps> = (
   props: IHoursMetaDataProps
 ) => {
-
-  let labelCreated = props.labelCreated ? props.labelCreated : 'Erstellt am: ';
-  let labelModified = props.labelModified ? props.labelModified : 'Geändert am: ';
-  let labelCreatedby = props.labelCreatedby ? props.labelCreatedby : 'von: ';
-  let labelModifiedby = props.labelModifiedby ? props.labelModifiedby : 'von: ';
+  let labelCreated = props.labelCreated ? props.labelCreated : "Erstellt am: ";
+  let labelModified = props.labelModified
+    ? props.labelModified
+    : "Geändert am: ";
+  let labelCreatedby = props.labelCreatedby ? props.labelCreatedby : "von: ";
+  let labelModifiedby = props.labelModifiedby ? props.labelModifiedby : "von: ";
 
   return (
     <div className={styles.labeledControl}>

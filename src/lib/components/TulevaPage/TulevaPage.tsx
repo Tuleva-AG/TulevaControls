@@ -2,25 +2,15 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import { Button, List, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import { IBaseEntity } from "../../types";
-import HoursEditor from "../HoursEditor";
-import { PartProps } from "../HoursEditor/HoursEditor";
-import { EditorContextProvider } from "../hoursSharedContext";
-import PageHeader from "../PageHeader";
-// import { useTranslation } from 'react-i18next';
-// import { Redirect } from 'react-router';
-
-// import { useHasPermissions } from '../roles/Can';
-// import Rights from '../roles/rights';
-import styles from "./hoursPage.module.scss";
+import HoursEditor from "../TulevaEditor";
+import { PartProps } from "../TulevaEditor/TulevaEditor";
+import { EditorContextProvider } from "../tulevaSharedContext";
+import PageHeader from "../TulevaPageHeader";
+import styles from "./tulevaPage.module.scss";
 
 export interface IHoursPageProps {
   caption?: string;
   helpTopic?: string;
-  // deleteRights: Rights;
-  // editRights: Rights;
-  // createRights: Rights;
-  // listRights: Rights;
-
   deleteRights?: boolean;
   editRights?: boolean;
   createRights?: boolean;
@@ -69,7 +59,6 @@ const HoursPage: React.FC<IHoursPageProps> = (props: IHoursPageProps) => {
     props.dataSource as IBaseEntity[]
   );
   const createPerms = props.createRights;
-  // const { t } = useTranslation();
 
   let labelNew = props.labelNew ? props.labelNew : "Neu";
 

@@ -1,6 +1,3 @@
-// import "antd/dist/antd.css";
-// import "moment/locale/de";
-
 import {
   CheckCircleTwoTone,
   CloseCircleTwoTone,
@@ -10,11 +7,9 @@ import {
 import { Button, Modal, Popconfirm } from "antd";
 import React, { useEffect, useState } from "react";
 import { IBaseEntity } from "../../types/baseEntity";
-// import { useHasPermissions } from '../../common/roles/Can';
-// import Rights from '../../common/roles/rights';                   --- todo
-import styles from "./hoursEditor.module.scss";
-import { useEditorContext } from "../hoursSharedContext";
-import HoursMetaData from "../HoursMetaData/HoursMetaData";
+import styles from "./tulevaEditor.module.scss";
+import { useEditorContext } from "../tulevaSharedContext";
+import HoursMetaData from "../TulevaMetaData/TulevaMetaData";
 
 export type PartProps = {
   children: React.ReactNode;
@@ -36,9 +31,6 @@ interface IHoursEditorProps {
   editor?: React.FC<PartProps>;
   onRenderEdit: (item: IBaseEntity) => React.ReactNode;
   onRenderView: (item: IBaseEntity) => React.ReactNode;
-
-  //   deleteRights: Rights;  --- todo
-  //   editRights: Rights;    --- todo
 
   deleteRights?: boolean;
   editRights?: boolean;
@@ -64,10 +56,6 @@ const HoursEditor: React.FC<IHoursEditorProps> = (props) => {
   const [itemState, setItemState] = useState(props.item);
   const [confirmState, setConfirmState] = useState<boolean>(false);
 
-  // --- todo
-  //   const deletePerms = useHasPermissions(props.deleteRights);
-  //   const editPerms = useHasPermissions(props.editRights);
-
   let deletePerms = true;
   if (props.deleteRights != undefined) {
     deletePerms = props.deleteRights;
@@ -76,8 +64,6 @@ const HoursEditor: React.FC<IHoursEditorProps> = (props) => {
   if (props.editRights != undefined) {
     editPerms = props.editRights;
   }
-  // let deletePerms = props.deleteRights ? props.deleteRights : true;
-  // let editPerms = props.editRights ? props.editRights : true;
 
   let labelSave = props.labelSave ? props.labelSave : "Speichern";
   let labelCancel = props.labelCancel ? props.labelCancel : "Abbrechen";

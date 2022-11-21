@@ -1,4 +1,4 @@
-import { IBaseEntity } from "./../types/baseEntity";
+import { IBaseEntity } from "../types/baseEntity";
 import { useState } from "react";
 import { createContainer } from "react-tracked";
 
