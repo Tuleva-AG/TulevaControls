@@ -2,13 +2,13 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import { Button, List, Spin } from "antd";
 import React, { useEffect, useState } from "react";
 import { IBaseEntity } from "../../types";
-import HoursEditor from "../TulevaEditor";
+import TulevaEditor from "../TulevaEditor";
 import { PartProps } from "../TulevaEditor/TulevaEditor";
 import { EditorContextProvider } from "../tulevaSharedContext";
 import PageHeader from "../TulevaPageHeader";
 import styles from "./tulevaPage.module.scss";
 
-export interface IHoursPageProps {
+export interface ITulevaPageProps {
   caption?: string;
   helpTopic?: string;
   deleteRights?: boolean;
@@ -54,7 +54,7 @@ const Filter: React.FC<PartProps> = ({ children }) => <>{children}</>;
 
 const Editor: React.FC<PartProps> = ({ children }) => <>{children}</>;
 
-const HoursPage: React.FC<IHoursPageProps> = (props: IHoursPageProps) => {
+const TulevaPage: React.FC<ITulevaPageProps> = (props: ITulevaPageProps) => {
   const [data, setData] = useState<IBaseEntity[]>(
     props.dataSource as IBaseEntity[]
   );
@@ -84,7 +84,7 @@ const HoursPage: React.FC<IHoursPageProps> = (props: IHoursPageProps) => {
     return (
       <List.Item key={item.id} className={styles.listItem}>
         <EditorContextProvider>
-          <HoursEditor
+          <TulevaEditor
             item={item}
             editMode={onGetEditMode(item)}
             onSave={(saveItem) => onSaveClick(saveItem, item.id as string)}
@@ -106,7 +106,7 @@ const HoursPage: React.FC<IHoursPageProps> = (props: IHoursPageProps) => {
             onRenderView={() => props.onRenderView(item)}
             onRenderEdit={() => props.onRenderEdit(item)}
             additionalButtons={props.additionalButtons}
-          ></HoursEditor>
+          ></TulevaEditor>
         </EditorContextProvider>
       </List.Item>
     );
@@ -177,4 +177,4 @@ const HoursPage: React.FC<IHoursPageProps> = (props: IHoursPageProps) => {
   );
 };
 
-export default HoursPage;
+export default TulevaPage;

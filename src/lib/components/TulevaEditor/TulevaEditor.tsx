@@ -9,13 +9,13 @@ import React, { useEffect, useState } from "react";
 import { IBaseEntity } from "../../types/baseEntity";
 import styles from "./tulevaEditor.module.scss";
 import { useEditorContext } from "../tulevaSharedContext";
-import HoursMetaData from "../TulevaMetaData/TulevaMetaData";
+import TulevaMetaData from "../TulevaMetaData/TulevaMetaData";
 
 export type PartProps = {
   children: React.ReactNode;
 };
 
-interface IHoursEditorProps {
+interface ITulevaEditorProps {
   item: IBaseEntity;
   onSave: (item: IBaseEntity) => void;
   onDelete: (id: string | undefined) => void;
@@ -50,7 +50,7 @@ interface IHoursEditorProps {
   labelCopy?: string;
 }
 
-const HoursEditor: React.FC<IHoursEditorProps> = (props) => {
+const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
   const getEditorContext = useEditorContext();
   const [editMode, setEditMode] = useState(props.editMode);
   const [itemState, setItemState] = useState(props.item);
@@ -161,7 +161,7 @@ const HoursEditor: React.FC<IHoursEditorProps> = (props) => {
                 >
                   {props.onRenderEdit(props.item)}
                   {!props.hideMetaData && (
-                    <HoursMetaData item={props.item}></HoursMetaData>
+                    <TulevaMetaData item={props.item}></TulevaMetaData>
                   )}
                 </Modal>
               </>
@@ -170,7 +170,7 @@ const HoursEditor: React.FC<IHoursEditorProps> = (props) => {
               <>
                 {props.onRenderEdit(props.item)}
                 {!props.hideMetaData && (
-                  <HoursMetaData item={props.item}></HoursMetaData>
+                  <TulevaMetaData item={props.item}></TulevaMetaData>
                 )}
               </>
             )}
@@ -264,4 +264,4 @@ const HoursEditor: React.FC<IHoursEditorProps> = (props) => {
   );
 };
 
-export default HoursEditor;
+export default TulevaEditor;
