@@ -70,63 +70,77 @@ describe("Page Header", () => {
   });
 });
 
-describe("Hours Meta Data", () => {
+describe("Meta Data", () => {
   it("is truthy", () => {
     expect(TulevaMetaData).toBeTruthy();
   });
 });
 
-describe("Hours Page", () => {
+describe("Page", () => {
   it("is truthy", () => {
     expect(TulevaPage).toBeTruthy();
   });
 });
 
-describe("Hours Editor", () => {
+describe("Tuleva Editor", () => {
   it("is truthy", () => {
     expect(TulevaEditor).toBeTruthy();
   });
 });
 
-// const renderViewer = (item: any) => {
-//   return <></>;
-// };
+Object.defineProperty(window, "matchMedia", {
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // Deprecated
+    removeListener: jest.fn(), // Deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
 
-// const renderEditor = (item: any) => {
-//   return <>{item}</>;
-// };
+const renderViewer = (item: any) => {
+  return <></>;
+};
 
-// const renderListHeader = () => {
-//   return <></>;
-// };
+const renderEditor = (item: any) => {
+  return <>{item}</>;
+};
 
-// const renderFilter = () => {
-//   return <></>;
-// };
-// describe("header page matches snapshot", () => {
-//   it("matches snapshot", () => {
-//     const { asFragment } = render(
-//       <TulevaPage
-//         dataSource={items}
-//         loading={false}
-//         onAddNew={() => {}}
-//         onDelete={() => {}}
-//         onExit={() => {}}
-//         onSave={() => {}}
-//         onRenderView={(item) => renderViewer(item)}
-//         onRenderEdit={(item) => renderEditor(item)}
-//         onRenderListHeader={() => renderListHeader()}
-//         onRenderFilter={() => renderFilter()}
-//         createRights={true}
-//         deleteRights={false}
-//         editRights={false}
-//         listRights={true}
-//         caption={"Tests"}
-//         helpTopic="news"
-//         showAsModal={true}
-//         hideCopyButton={true}
-//       />
-//     );
-//     expect(asFragment()).toMatchSnapshot();
-//   });
-// });
+const renderListHeader = () => {
+  return <></>;
+};
+
+const renderFilter = () => {
+  return <></>;
+};
+describe("header page matches snapshot", () => {
+  it("matches snapshot", () => {
+    const { asFragment } = render(
+      <TulevaPage
+        dataSource={items}
+        loading={false}
+        onAddNew={() => {}}
+        onDelete={() => {}}
+        onExit={() => {}}
+        onSave={() => {}}
+        onRenderView={(item) => renderViewer(item)}
+        onRenderEdit={(item) => renderEditor(item)}
+        onRenderListHeader={() => renderListHeader()}
+        onRenderFilter={() => renderFilter()}
+        createRights={true}
+        deleteRights={false}
+        editRights={false}
+        listRights={true}
+        caption={"Tests"}
+        helpTopic="news"
+        showAsModal={true}
+        hideCopyButton={true}
+      />
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+});
