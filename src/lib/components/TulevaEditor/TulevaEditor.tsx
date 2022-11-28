@@ -40,7 +40,9 @@ interface ITulevaEditorProps {
   confirmOnSave?: boolean;
   confirmOnSaveMessage?: string;
 
-  additionalButtons?: (item: IBaseEntity) => JSX.Element;
+  additionalEditButtons?: (item: IBaseEntity) => JSX.Element;
+  additionalViewButtons?: (item: IBaseEntity) => JSX.Element;
+
   labelSave?: string;
   labelCancel?: string;
   labelConfirmDelete?: string;
@@ -221,7 +223,8 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
                   onClick={exitEditMode}
                 />
               )}
-              {props.additionalButtons && props.additionalButtons(props.item)}
+              {props.additionalEditButtons &&
+                props.additionalEditButtons(props.item)}
             </>
           )}
           {!editMode && (
@@ -256,6 +259,8 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
                   />
                 </Popconfirm>
               )}
+              {props.additionalViewButtons &&
+                props.additionalViewButtons(props.item)}
             </>
           )}
         </div>
