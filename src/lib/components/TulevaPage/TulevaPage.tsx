@@ -43,7 +43,8 @@ export interface ITulevaPageProps {
 
   onExit: (item: IBaseEntity) => void;
 
-  additionalButtons?: (item: IBaseEntity) => JSX.Element;
+  additionalViewButtons?: (item: IBaseEntity) => JSX.Element;
+  additionalEditButtons?: (item: IBaseEntity) => JSX.Element;
 
   labelNew?: string;
 }
@@ -105,7 +106,8 @@ const TulevaPage: React.FC<ITulevaPageProps> = (props: ITulevaPageProps) => {
             confirmOnSaveMessage={props.confirmOnSaveMessage}
             onRenderView={() => props.onRenderView(item)}
             onRenderEdit={() => props.onRenderEdit(item)}
-            additionalButtons={props.additionalButtons}
+            additionalEditButtons={props.additionalEditButtons}
+            additionalViewButtons={props.additionalViewButtons}
           ></TulevaEditor>
         </EditorContextProvider>
       </List.Item>
