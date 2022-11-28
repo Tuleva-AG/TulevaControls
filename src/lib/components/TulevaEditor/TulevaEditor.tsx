@@ -9,13 +9,13 @@ import React, { useEffect, useState } from "react";
 import { IBaseEntity } from "../../types/baseEntity";
 import styles from "./tulevaEditor.module.scss";
 import { useEditorContext } from "../tulevaSharedContext";
-import HoursMetaData from "../TulevaMetaData/TulevaMetaData";
+import TulevaMetaData from "../TulevaMetaData/TulevaMetaData";
 
 export type PartProps = {
   children: React.ReactNode;
 };
 
-interface IHoursEditorProps {
+interface ITulevaEditorProps {
   item: IBaseEntity;
   onSave: (item: IBaseEntity) => void;
   onDelete: (id: string | undefined) => void;
@@ -40,7 +40,9 @@ interface IHoursEditorProps {
   confirmOnSave?: boolean;
   confirmOnSaveMessage?: string;
 
-  additionalButtons?: (item: IBaseEntity) => JSX.Element;
+  additionalEditButtons?: (item: IBaseEntity) => JSX.Element;
+  additionalViewButtons?: (item: IBaseEntity) => JSX.Element;
+
   labelSave?: string;
   labelCancel?: string;
   labelConfirmDelete?: string;
@@ -50,7 +52,7 @@ interface IHoursEditorProps {
   labelCopy?: string;
 }
 
-const HoursEditor: React.FC<IHoursEditorProps> = (props) => {
+const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
   const getEditorContext = useEditorContext();
   const [editMode, setEditMode] = useState(props.editMode);
   const [itemState, setItemState] = useState(props.item);
@@ -161,7 +163,7 @@ const HoursEditor: React.FC<IHoursEditorProps> = (props) => {
                 >
                   {props.onRenderEdit(props.item)}
                   {!props.hideMetaData && (
-                    <HoursMetaData item={props.item}></HoursMetaData>
+                    <TulevaMetaData item={props.item}></TulevaMetaData>
                   )}
                 </Modal>
               </>
@@ -170,7 +172,7 @@ const HoursEditor: React.FC<IHoursEditorProps> = (props) => {
               <>
                 {props.onRenderEdit(props.item)}
                 {!props.hideMetaData && (
-                  <HoursMetaData item={props.item}></HoursMetaData>
+                  <TulevaMetaData item={props.item}></TulevaMetaData>
                 )}
               </>
             )}
@@ -221,7 +223,8 @@ const HoursEditor: React.FC<IHoursEditorProps> = (props) => {
                   onClick={exitEditMode}
                 />
               )}
-              {props.additionalButtons && props.additionalButtons(props.item)}
+              {props.additionalEditButtons &&
+                props.additionalEditButtons(props.item)}
             </>
           )}
           {!editMode && (
@@ -256,6 +259,8 @@ const HoursEditor: React.FC<IHoursEditorProps> = (props) => {
                   />
                 </Popconfirm>
               )}
+              {props.additionalViewButtons &&
+                props.additionalViewButtons(props.item)}
             </>
           )}
         </div>
@@ -264,4 +269,4 @@ const HoursEditor: React.FC<IHoursEditorProps> = (props) => {
   );
 };
 
-export default HoursEditor;
+export default TulevaEditor;

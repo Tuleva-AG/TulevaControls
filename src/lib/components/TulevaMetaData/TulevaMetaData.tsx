@@ -3,7 +3,7 @@ import React from "react";
 import { IBaseEntity } from "../../types/baseEntity";
 import styles from "./tulevaMetaData.module.scss";
 
-export interface IHoursMetaDataProps {
+export interface ITulevaMetaDataProps {
   item: IBaseEntity;
   labelCreated?: string;
   labelModified?: string;
@@ -11,8 +11,8 @@ export interface IHoursMetaDataProps {
   labelModifiedby?: string;
 }
 
-const HoursMetaData: React.FC<IHoursMetaDataProps> = (
-  props: IHoursMetaDataProps
+const TulevaMetaData: React.FC<ITulevaMetaDataProps> = (
+  props: ITulevaMetaDataProps
 ) => {
   let labelCreated = props.labelCreated ? props.labelCreated : "Erstellt am: ";
   let labelModified = props.labelModified
@@ -43,4 +43,4 @@ const HoursMetaData: React.FC<IHoursMetaDataProps> = (
   );
 };
 
-export default HoursMetaData;
+export default TulevaMetaData;
