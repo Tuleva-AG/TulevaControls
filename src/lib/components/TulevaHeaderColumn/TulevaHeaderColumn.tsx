@@ -2,12 +2,12 @@ import React, { ReactNode, useState } from "react";
 import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
 
 interface IHeaderColumnProps {
-  sortField: string;
+  sortField?: string;
   sortFieldMember?: string;
   sortState?: string;
-  sortDescending: boolean;
+  sortDescending?: boolean;
   className?: string;
-  onClick: (
+  onClick?: (
     sortField: string,
     sortDescending: boolean,
     sortFieldMember?: string
@@ -18,7 +18,7 @@ interface IHeaderColumnProps {
 const HeaderColumn: React.FC<IHeaderColumnProps> = (
   props: IHeaderColumnProps
 ) => {
-  const [sortDescendingState, setSortDescendingState] = useState<boolean>(
+  const [sortDescendingState, setSortDescendingState] = useState<boolean | undefined>(
     props.sortDescending
   );
   const ascDesc: boolean =
@@ -29,7 +29,7 @@ const HeaderColumn: React.FC<IHeaderColumnProps> = (
     <div
       onClick={() => {
         setSortDescendingState(!sortDescendingState);
-        props.onClick(
+        props.onClick && props.sortField && props.onClick(
           props.sortField,
           !sortDescendingState,
           props.sortFieldMember

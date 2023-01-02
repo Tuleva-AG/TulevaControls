@@ -10,6 +10,8 @@ import styles from "./tulevaPage.module.scss";
 
 export interface ITulevaPageProps {
   caption?: string;
+  subLine?: string;
+  summary?: string;
   helpTopic?: string;
   deleteRights?: boolean;
   editRights?: boolean;
@@ -126,8 +128,8 @@ const TulevaPage: React.FC<ITulevaPageProps> = (props: ITulevaPageProps) => {
         <PageHeader
           helpTopic={props.helpTopic}
           caption={props.caption as string}
-          subLine={""}
-          summary={""}
+          subLine={props.subLine as string}
+          summary={props.summary as string}
         >
           {!props.onRenderHeaderButtons && (
             <Button
