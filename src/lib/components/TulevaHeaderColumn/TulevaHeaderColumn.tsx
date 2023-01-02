@@ -38,7 +38,7 @@ const HeaderColumn: React.FC<IHeaderColumnProps> = (
       className={props.className}
     >
       {props.children}
-      {ascDesc &&
+      {props.onClick && ascDesc &&
         (sortDescendingState ? (
           <CaretDownOutlined
             onClick={() => setSortDescendingState(!sortDescendingState)}

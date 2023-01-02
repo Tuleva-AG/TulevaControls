@@ -128,8 +128,8 @@ const TulevaPage: React.FC<ITulevaPageProps> = (props: ITulevaPageProps) => {
         <PageHeader
           helpTopic={props.helpTopic}
           caption={props.caption as string}
-          subLine={props.subLine as string}
-          summary={props.summary as string}
+          subLine={props.subLine}
+          summary={props.summary}
         >
           {!props.onRenderHeaderButtons && (
             <Button

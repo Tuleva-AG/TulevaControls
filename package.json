@@ -1,6 +1,6 @@
 {
   "name": "@tuleva-ag/tuleva-controls",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "TulevaControls",
   "scripts": {
     "rollup": "rollup -c",
