@@ -43,6 +43,7 @@ interface ITulevaEditorProps {
   additionalEditButtons?: (item: IBaseEntity) => JSX.Element;
   additionalViewButtons?: (item: IBaseEntity) => JSX.Element;
 
+  editorTitle?: string;
   labelSave?: string;
   labelCancel?: string;
   labelConfirmDelete?: string;
@@ -150,7 +151,8 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
                 </div>
 
                 <Modal
-                  visible={editMode}
+                  title={props.editorTitle}
+                  open={editMode}
                   onOk={toggleEditMode}
                   onCancel={exitEditMode}
                   width={1000}

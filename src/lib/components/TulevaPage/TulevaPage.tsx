@@ -49,6 +49,7 @@ export interface ITulevaPageProps {
   additionalEditButtons?: (item: IBaseEntity) => JSX.Element;
 
   labelNew?: string;
+  editorTitle?: string;
 }
 
 const Header: React.FC<PartProps> = ({ children }) => <>{children}</>;
@@ -110,6 +111,7 @@ const TulevaPage: React.FC<ITulevaPageProps> = (props: ITulevaPageProps) => {
             onRenderEdit={() => props.onRenderEdit(item)}
             additionalEditButtons={props.additionalEditButtons}
             additionalViewButtons={props.additionalViewButtons}
+            editorTitle={props.editorTitle}
           ></TulevaEditor>
         </EditorContextProvider>
       </List.Item>
