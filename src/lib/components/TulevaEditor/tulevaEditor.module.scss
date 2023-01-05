@@ -5,6 +5,10 @@
   color: $color-hover;
 }
 
+.wrappedButtons {
+  white-space: nowrap;
+}
+
 .viewTable {
   display: table;
   width: 100%;
