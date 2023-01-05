@@ -200,7 +200,7 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
       <div className={styles.buttonArea}>
         <div className={styles.buttonAreaInner}>
           {props.item && editMode && !props.showAsModal && (
-            <div className={props.wrapButtons ? styles.wrappedButtons : ''}>
+            <>
               {!props.hideSaveButton && (
                 <Popconfirm
                   title={props.confirmOnSaveMessage}
@@ -233,10 +233,10 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
               )}
               {props.additionalEditButtons &&
                 props.additionalEditButtons(props.item)}
-            </div>
+            </>
           )}
           {!editMode && (
-            <>
+            <div className={props.wrapButtons ? styles.wrappedButtons : ''}>
               {!props.hideEditButton && (
                 <Button
                   className={styles.addNew}
@@ -279,11 +279,11 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
               )}
               {props.additionalViewButtons &&
                 props.additionalViewButtons(props.item)}
-            </>
+            </div>
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
