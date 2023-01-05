@@ -3,6 +3,7 @@ import {
   CloseCircleTwoTone,
   DeleteOutlined,
   CopyOutlined,
+  EditOutlined,
 } from "@ant-design/icons";
 import { Button, Modal, Popconfirm } from "antd";
 import React, { useEffect, useState } from "react";
@@ -18,9 +19,11 @@ export type PartProps = {
 interface ITulevaEditorProps {
   item: IBaseEntity;
   onSave: (item: IBaseEntity) => void;
+  onClick?: (item: IBaseEntity) => void;
   onDelete: (id: string | undefined) => void;
   onCopyItem?: (id: string | undefined) => void;
   editMode: boolean;
+  hideEditButton?: boolean;
   hideDeleteButton?: boolean;
   hideCopyButton?: boolean;
   hideExitButton?: boolean;
@@ -51,6 +54,7 @@ interface ITulevaEditorProps {
   labelNo?: string;
   labelDeleteEntry?: string;
   labelCopy?: string;
+  labelEdit?: string;
 }
 
 const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
@@ -79,6 +83,7 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
     ? props.labelDeleteEntry
     : "Eintrag löschen...";
   let labelCopy = props.labelCopy ? props.labelCopy : "Kopieren";
+  let labelEdit = props.labelEdit ? props.labelEdit : "Bearbeiten";
 
   const toggleEditMode = (e: any) => {
     if (!props.stayInEditMode) {
@@ -183,7 +188,7 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
         {itemState && !editMode && (
           <div
             className={styles.display + " " + styles.viewTable}
-            onClick={toggleEditMode}
+            onClick={(e: any) => { props.onClick ? props.onClick(props.item) : toggleEditMode(e) }}
           >
             <div className={styles.viewRow}>
               {props.onRenderView(props.item)}
@@ -241,6 +246,16 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
                   onClick={() =>
                     props.onCopyItem && props.onCopyItem(props.item.id)
                   }
+                />
+              )}
+              {!props.hideEditButton && (
+                <Button
+                  className={styles.addNew}
+                  shape="circle"
+                  size="middle"
+                  title={labelEdit}
+                  icon={<EditOutlined />}
+                  onClick={toggleEditMode}
                 />
               )}
               {!props.hideDeleteButton && (

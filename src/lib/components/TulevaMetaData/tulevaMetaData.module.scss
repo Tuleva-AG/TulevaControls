@@ -1,4 +1,4 @@
-.medaDataTable {
+.metaDataTable {
   display: table;
   width: 100%;
   height: 40px;
@@ -6,7 +6,7 @@
   padding-left: 8px;
   float: left;
   // background-color: ghostwhite;
-  .medaDataRow {
+  .metaDataRow {
     display: table-row;
     div {
       display: table-cell;
@@ -16,7 +16,7 @@
       text-align: left;
     }
   }
-  .medaDataLabel {
+  .metaDataLabel {
     width: 10%;
   }
 }

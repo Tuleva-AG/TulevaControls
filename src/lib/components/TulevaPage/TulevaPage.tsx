@@ -18,6 +18,7 @@ export interface ITulevaPageProps {
   createRights?: boolean;
   listRights?: boolean;
 
+  hideEditButton?: boolean;
   hideDeleteButton?: boolean;
   hideExitButton?: boolean;
   hideSaveButton?: boolean;
@@ -33,6 +34,7 @@ export interface ITulevaPageProps {
   onRenderHeaderButtons?: () => JSX.Element;
   dataSource?: IBaseEntity[];
 
+  onClick: (item: IBaseEntity | any) => void;
   onSave: (item: IBaseEntity | any, id: string) => void;
   onDelete: (id: string | undefined) => void;
   onCopyItem?: (id: string | undefined) => void;
@@ -92,12 +94,14 @@ const TulevaPage: React.FC<ITulevaPageProps> = (props: ITulevaPageProps) => {
             item={item}
             editMode={onGetEditMode(item)}
             onSave={(saveItem) => onSaveClick(saveItem, item.id as string)}
+            onClick={() => props.onClick(item)}
             onDelete={() => props.onDelete(item.id)}
             onCopyItem={() => props.onCopyItem && props.onCopyItem(item.id)}
             onExit={(): void => props.onExit(item)}
             editor={Editor}
             deleteRights={props.deleteRights}
             editRights={props.editRights}
+            hideEditButton={props.hideEditButton}
             hideDeleteButton={props.hideDeleteButton}
             hideExitButton={props.hideExitButton}
             hideSaveButton={props.hideSaveButton}
