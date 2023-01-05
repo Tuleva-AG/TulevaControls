@@ -39,11 +39,17 @@ const PageHeader: React.FC<IPageHeaderProps> = (props: IPageHeaderProps) => {
         </div>
       </div>
       <div className={styles.headerInner}>
-        <div className={styles.headerSubline}>{props.subLine}</div>
-        <div className={styles.headerButtons + " " + props.buttonsClassName}>
-          {props.children}
-        </div>
-        <div className={styles.headerSummary}>{props.summary}</div>
+        {
+          props.subLine && <div className={styles.headerSubline}>{props.subLine}</div>
+        }
+        {
+          props.children && <div className={styles.headerButtons + " " + props.buttonsClassName}>
+            {props.children}
+          </div>
+        }
+        {
+          props.summary && <div className={styles.headerSummary}>{props.summary}</div>
+        }
       </div>
     </div>
   );

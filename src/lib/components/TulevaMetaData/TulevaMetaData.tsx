@@ -23,18 +23,18 @@ const TulevaMetaData: React.FC<ITulevaMetaDataProps> = (
 
   return (
     <div className={styles.labeledControl}>
-      <div className={styles.medaDataTable}>
-        <div className={styles.medaDataRow}>
-          <div className={styles.medaDataLabel}>
+      <div className={styles.metaDataTable}>
+        <div className={styles.metaDataRow}>
+          <div className={styles.metaDataLabel}>
             {labelCreated}
-            {moment(props.item.created).format("lll")} {labelCreatedby}
+            {moment(props.item.created).format("lll")} {props.item.createdBy && labelCreatedby}
             {props.item.createdBy?.name}
           </div>
         </div>
-        <div className={styles.medaDataRow}>
+        <div className={styles.metaDataRow}>
           <div>
             {labelModified}
-            {moment(props.item.edited).format("lll")} {labelModifiedby}
+            {moment(props.item.edited).format("lll")} {props.item.editedBy && labelModifiedby}
             {props.item.editedBy?.name}
           </div>
         </div>
