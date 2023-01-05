@@ -1,6 +1,6 @@
 {
   "name": "@tuleva-ag/tuleva-controls",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "TulevaControls",
   "scripts": {
     "rollup": "rollup -c",
@@ -36,7 +36,7 @@
   },
   "peerDependencies": {
     "@ant-design/icons": "^4.8.0",
-    "antd": "^4.24.3",
+    "antd": "^5.1.2",
     "csstype": "^3.1.1",
     "js-tokens": "^4.0.0",
     "loose-envify": "^1.4.0",
