@@ -34,7 +34,7 @@ export interface ITulevaPageProps {
   onRenderHeaderButtons?: () => JSX.Element;
   dataSource?: IBaseEntity[];
 
-  onClick: (item: IBaseEntity | any) => void;
+  onClick?: (item: IBaseEntity | any) => void;
   onSave: (item: IBaseEntity | any, id: string) => void;
   onDelete: (id: string | undefined) => void;
   onCopyItem?: (id: string | undefined) => void;
@@ -52,6 +52,7 @@ export interface ITulevaPageProps {
 
   labelNew?: string;
   editorTitle?: string;
+  wrappedButtons?: boolean;
 }
 
 const Header: React.FC<PartProps> = ({ children }) => <>{children}</>;
@@ -94,7 +95,7 @@ const TulevaPage: React.FC<ITulevaPageProps> = (props: ITulevaPageProps) => {
             item={item}
             editMode={onGetEditMode(item)}
             onSave={(saveItem) => onSaveClick(saveItem, item.id as string)}
-            onClick={() => props.onClick(item)}
+            onClick={props.onClick}
             onDelete={() => props.onDelete(item.id)}
             onCopyItem={() => props.onCopyItem && props.onCopyItem(item.id)}
             onExit={(): void => props.onExit(item)}
@@ -116,6 +117,7 @@ const TulevaPage: React.FC<ITulevaPageProps> = (props: ITulevaPageProps) => {
             additionalEditButtons={props.additionalEditButtons}
             additionalViewButtons={props.additionalViewButtons}
             editorTitle={props.editorTitle}
+            wrapButtons={props.wrappedButtons ? props.wrappedButtons : false}
           ></TulevaEditor>
         </EditorContextProvider>
       </List.Item>

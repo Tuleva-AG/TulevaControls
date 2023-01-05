@@ -42,6 +42,7 @@ interface ITulevaEditorProps {
   stayInEditMode?: boolean;
   confirmOnSave?: boolean;
   confirmOnSaveMessage?: string;
+  wrapButtons: boolean;
 
   additionalEditButtons?: (item: IBaseEntity) => JSX.Element;
   additionalViewButtons?: (item: IBaseEntity) => JSX.Element;
@@ -199,13 +200,13 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
       <div className={styles.buttonArea}>
         <div className={styles.buttonAreaInner}>
           {props.item && editMode && !props.showAsModal && (
-            <>
+            <div className={props.wrapButtons ? styles.wrappedButtons : ''}>
               {!props.hideSaveButton && (
                 <Popconfirm
                   title={props.confirmOnSaveMessage}
-                  visible={confirmState}
+                  open={confirmState}
                   placement="topRight"
-                  onVisibleChange={handleVisibleChange}
+                  onOpenChange={handleVisibleChange}
                   onConfirm={confirm}
                   onCancel={cancel}
                   okText={labelYes}
@@ -232,10 +233,20 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
               )}
               {props.additionalEditButtons &&
                 props.additionalEditButtons(props.item)}
-            </>
+            </div>
           )}
           {!editMode && (
             <>
+              {!props.hideEditButton && (
+                <Button
+                  className={styles.addNew}
+                  shape="circle"
+                  size="middle"
+                  title={labelEdit}
+                  icon={<EditOutlined />}
+                  onClick={toggleEditMode}
+                />
+              )}
               {!props.hideCopyButton && (
                 <Button
                   className={styles.addNew}
@@ -246,16 +257,6 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
                   onClick={() =>
                     props.onCopyItem && props.onCopyItem(props.item.id)
                   }
-                />
-              )}
-              {!props.hideEditButton && (
-                <Button
-                  className={styles.addNew}
-                  shape="circle"
-                  size="middle"
-                  title={labelEdit}
-                  icon={<EditOutlined />}
-                  onClick={toggleEditMode}
                 />
               )}
               {!props.hideDeleteButton && (
