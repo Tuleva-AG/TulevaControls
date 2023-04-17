@@ -1,4 +1,10 @@
-import { CheckCircleTwoTone, CloseCircleTwoTone, DeleteOutlined, CopyOutlined, EditOutlined } from "@ant-design/icons";
+import {
+  CheckCircleTwoTone,
+  CloseCircleTwoTone,
+  DeleteOutlined,
+  CopyOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 import { Button, Modal, Popconfirm } from "antd";
 import React, { useEffect, useState } from "react";
 import { IBaseEntity } from "../../types/baseEntity";
@@ -38,10 +44,15 @@ interface ITulevaEditorProps {
   confirmOnSaveMessage?: string;
   wrapButtons: boolean;
 
+  onRenderEditorFooter?: (
+    item: IBaseEntity,
+    closeEditor: (e: any) => void
+  ) => React.ReactNode;
   additionalEditButtons?: (item: IBaseEntity) => JSX.Element;
   additionalViewButtons?: (item: IBaseEntity) => JSX.Element;
 
   editorTitle?: string;
+  onRenderEditorCaption?: (item: IBaseEntity) => React.ReactNode;
   labelSave?: string;
   labelCancel?: string;
   labelConfirmDelete?: string;
@@ -71,10 +82,14 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
 
   let labelSave = props.labelSave ? props.labelSave : "Speichern";
   let labelCancel = props.labelCancel ? props.labelCancel : "Abbrechen";
-  let labelConfirmDelete = props.labelConfirmDelete ? props.labelConfirmDelete : "Diesen Eintrag wirklich löschen?";
+  let labelConfirmDelete = props.labelConfirmDelete
+    ? props.labelConfirmDelete
+    : "Diesen Eintrag wirklich löschen?";
   let labelYes = props.labelYes ? props.labelYes : "Ja";
   let labelNo = props.labelNo ? props.labelNo : "Nein";
-  let labelDeleteEntry = props.labelDeleteEntry ? props.labelDeleteEntry : "Eintrag löschen...";
+  let labelDeleteEntry = props.labelDeleteEntry
+    ? props.labelDeleteEntry
+    : "Eintrag löschen...";
   let labelCopy = props.labelCopy ? props.labelCopy : "Kopieren";
   let labelEdit = props.labelEdit ? props.labelEdit : "Bearbeiten";
 
@@ -133,15 +148,19 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
   }, [getEditorContext.item]);
 
   function renderDefaultViewButtons(): React.ReactNode {
-    const editButtonContent = props.customEditButtonContent ? props.customEditButtonContent : <EditOutlined />;
+    const editButtonContent = props.customEditButtonContent ? (
+      props.customEditButtonContent
+    ) : (
+      <EditOutlined />
+    );
 
     return (
       <div className={props.wrapButtons ? styles.wrappedButtons : ""}>
         {!props.hideEditButton && (
           <Button
             className={styles.addNew}
-            shape='circle'
-            size='middle'
+            shape="circle"
+            size="middle"
             title={labelEdit}
             icon={editButtonContent}
             onClick={toggleEditMode}
@@ -150,8 +169,8 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
         {!props.hideCopyButton && (
           <Button
             className={styles.addNew}
-            shape='circle'
-            size='middle'
+            shape="circle"
+            size="middle"
             title={labelCopy}
             icon={<CopyOutlined />}
             onClick={() => props.onCopyItem && props.onCopyItem(props.item.id)}
@@ -160,22 +179,26 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
         {!props.hideDeleteButton && (
           <Popconfirm
             title={labelConfirmDelete}
-            placement='topRight'
+            placement="topRight"
             onConfirm={() => props.onDelete(props.item.id)}
             okText={labelYes}
             cancelText={labelNo}
           >
             <Button
               className={styles.addNew}
-              shape='circle'
-              size='middle'
+              shape="circle"
+              size="middle"
               title={labelDeleteEntry}
               icon={<DeleteOutlined />}
               disabled={!deletePerms}
             />
           </Popconfirm>
         )}
-        {props.additionalViewButtons && props.additionalViewButtons(props.item)}
+        {props.onRenderEditorFooter
+          ? props.onRenderEditorFooter &&
+            props.onRenderEditorFooter(props.item, exitEditMode)
+          : props.additionalViewButtons &&
+            props.additionalViewButtons(props.item)}
       </div>
     );
   }
@@ -188,13 +211,22 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
             {props.showAsModal && (
               <>
                 {props.onRenderView && (
-                  <div className={styles.display + " " + styles.viewTable} onClick={toggleEditMode}>
-                    <div className={styles.viewRow}>{props.onRenderView(props.item)}</div>
+                  <div
+                    className={styles.display + " " + styles.viewTable}
+                    onClick={toggleEditMode}
+                  >
+                    <div className={styles.viewRow}>
+                      {props.onRenderView(props.item)}
+                    </div>
                   </div>
                 )}
 
                 <Modal
-                  title={props.editorTitle}
+                  title={
+                    props.onRenderEditorCaption
+                      ? props.onRenderEditorCaption(props.item)
+                      : props.editorTitle
+                  }
                   open={editMode}
                   onOk={toggleEditMode}
                   onCancel={exitEditMode}
@@ -207,14 +239,18 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
                   cancelText={labelCancel}
                 >
                   {props.onRenderEdit(props.item)}
-                  {!props.hideMetaData && <TulevaMetaData item={props.item}></TulevaMetaData>}
+                  {!props.hideMetaData && (
+                    <TulevaMetaData item={props.item}></TulevaMetaData>
+                  )}
                 </Modal>
               </>
             )}
             {!props.showAsModal && (
               <>
                 {props.onRenderEdit(props.item)}
-                {!props.hideMetaData && <TulevaMetaData item={props.item}></TulevaMetaData>}
+                {!props.hideMetaData && (
+                  <TulevaMetaData item={props.item}></TulevaMetaData>
+                )}
               </>
             )}
           </>
@@ -226,7 +262,9 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
               props.onClick ? props.onClick(props.item) : toggleEditMode(e);
             }}
           >
-            <div className={styles.viewRow}>{props.onRenderView(props.item)}</div>
+            <div className={styles.viewRow}>
+              {props.onRenderView(props.item)}
+            </div>
           </div>
         )}
       </div>
@@ -238,7 +276,7 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
                 <Popconfirm
                   title={props.confirmOnSaveMessage}
                   open={confirmState}
-                  placement='topRight'
+                  placement="topRight"
                   onOpenChange={handleVisibleChange}
                   onConfirm={confirm}
                   onCancel={cancel}
@@ -247,27 +285,31 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
                   disabled={!getEditorContext.isValid}
                 >
                   <Button
-                    shape='circle'
-                    size='middle'
+                    shape="circle"
+                    size="middle"
                     title={labelSave}
-                    icon={<CheckCircleTwoTone twoToneColor='#52c41a' />}
+                    icon={<CheckCircleTwoTone twoToneColor="#52c41a" />}
                     disabled={!getEditorContext.isValid}
                   />
                 </Popconfirm>
               )}
               {!props.hideExitButton && (
                 <Button
-                  shape='circle'
-                  size='middle'
+                  shape="circle"
+                  size="middle"
                   title={labelCancel}
-                  icon={<CloseCircleTwoTone twoToneColor='#f5222d' />}
+                  icon={<CloseCircleTwoTone twoToneColor="#f5222d" />}
                   onClick={exitEditMode}
                 />
               )}
-              {props.additionalEditButtons && props.additionalEditButtons(props.item)}
+
+              {props.additionalEditButtons &&
+                props.additionalEditButtons(props.item)}
             </>
           )}
-          {props.item && editMode && props.showAsModal && <>{renderDefaultViewButtons()}</>}
+          {props.item && editMode && props.showAsModal && (
+            <>{renderDefaultViewButtons()}</>
+          )}
           {!editMode && renderDefaultViewButtons()}
         </div>
       </div>
