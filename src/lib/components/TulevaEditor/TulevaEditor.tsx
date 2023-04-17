@@ -194,11 +194,7 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
             />
           </Popconfirm>
         )}
-        {props.onRenderEditorFooter
-          ? props.onRenderEditorFooter &&
-            props.onRenderEditorFooter(props.item, exitEditMode)
-          : props.additionalViewButtons &&
-            props.additionalViewButtons(props.item)}
+        {props.additionalViewButtons && props.additionalViewButtons(props.item)}
       </div>
     );
   }
@@ -302,6 +298,8 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
                   onClick={exitEditMode}
                 />
               )}
+              {props.onRenderEditorFooter &&
+                props.onRenderEditorFooter(props.item, exitEditMode)}
 
               {props.additionalEditButtons &&
                 props.additionalEditButtons(props.item)}
