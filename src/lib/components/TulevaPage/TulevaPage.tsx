@@ -49,9 +49,14 @@ export interface ITulevaPageProps {
 
   additionalViewButtons?: (item: IBaseEntity) => JSX.Element;
   additionalEditButtons?: (item: IBaseEntity) => JSX.Element;
+  onRenderEditorFooter?: (
+    item: IBaseEntity,
+    closeEditor: (e: any) => void
+  ) => React.ReactNode;
 
   labelNew?: string;
   editorTitle?: string;
+  onRenderEditorCaption?: (item: IBaseEntity) => React.ReactNode;
   wrappedButtons?: boolean;
 }
 
@@ -116,7 +121,13 @@ const TulevaPage: React.FC<ITulevaPageProps> = (props: ITulevaPageProps) => {
             onRenderEdit={() => props.onRenderEdit(item)}
             additionalEditButtons={props.additionalEditButtons}
             additionalViewButtons={props.additionalViewButtons}
+            onRenderEditorFooter={(footerItem, closeEditor) =>
+              props.onRenderEditorFooter !== undefined
+                ? props.onRenderEditorFooter(footerItem, closeEditor)
+                : undefined
+            }
             editorTitle={props.editorTitle}
+            onRenderEditorCaption={props.onRenderEditorCaption}
             wrapButtons={props.wrappedButtons ? props.wrappedButtons : false}
           ></TulevaEditor>
         </EditorContextProvider>

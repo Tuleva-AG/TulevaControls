@@ -18,9 +18,9 @@ interface IHeaderColumnProps {
 const HeaderColumn: React.FC<IHeaderColumnProps> = (
   props: IHeaderColumnProps
 ) => {
-  const [sortDescendingState, setSortDescendingState] = useState<boolean | undefined>(
-    props.sortDescending
-  );
+  const [sortDescendingState, setSortDescendingState] = useState<
+    boolean | undefined
+  >(props.sortDescending);
   const ascDesc: boolean =
     props.sortFieldMember !== undefined
       ? props.sortState === props.sortFieldMember
@@ -29,16 +29,19 @@ const HeaderColumn: React.FC<IHeaderColumnProps> = (
     <div
       onClick={() => {
         setSortDescendingState(!sortDescendingState);
-        props.onClick && props.sortField && props.onClick(
-          props.sortField,
-          !sortDescendingState,
-          props.sortFieldMember
-        );
+        props.onClick &&
+          props.sortField &&
+          props.onClick(
+            props.sortField,
+            !sortDescendingState,
+            props.sortFieldMember
+          );
       }}
       className={props.className}
     >
       {props.children}
-      {props.onClick && ascDesc &&
+      {props.onClick &&
+        ascDesc &&
         (sortDescendingState ? (
           <CaretDownOutlined
             onClick={() => setSortDescendingState(!sortDescendingState)}
