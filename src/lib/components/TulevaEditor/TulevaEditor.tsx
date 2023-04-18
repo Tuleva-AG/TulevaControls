@@ -233,6 +233,12 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
                   okButtonProps={{ disabled: !getEditorContext.isValid }}
                   okText={labelSave}
                   cancelText={labelCancel}
+                  //additional buttons for modal footer
+                  footer={
+                    props.onRenderEditorFooter
+                      ? props.onRenderEditorFooter(props.item, toggleEditMode)
+                      : undefined
+                  }
                 >
                   {props.onRenderEdit(props.item)}
                   {!props.hideMetaData && (
@@ -298,9 +304,7 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
                   onClick={exitEditMode}
                 />
               )}
-              {props.onRenderEditorFooter &&
-                props.onRenderEditorFooter(props.item, exitEditMode)}
-
+              {/* additional buttons fro inline editing  */}
               {props.additionalEditButtons &&
                 props.additionalEditButtons(props.item)}
             </>
