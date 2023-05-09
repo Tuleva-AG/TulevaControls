@@ -63,6 +63,10 @@ interface ITulevaEditorProps {
   labelEdit?: string;
 
   customEditButtonContent?: JSX.Element;
+  labelCreated?: string;
+  labelModified?: string;
+  labelCreatedby?: string;
+  labelModifiedby?: string;
 }
 
 const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
@@ -242,7 +246,13 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
                 >
                   {props.onRenderEdit(props.item)}
                   {!props.hideMetaData && (
-                    <TulevaMetaData item={props.item}></TulevaMetaData>
+                    <TulevaMetaData
+                      item={props.item}
+                      labelCreated={props.labelCreated}
+                      labelModified={props.labelModified}
+                      labelCreatedby={props.labelCreatedby}
+                      labelModifiedby={props.labelModifiedby}
+                    ></TulevaMetaData>
                   )}
                 </Modal>
               </>
@@ -251,7 +261,13 @@ const TulevaEditor: React.FC<ITulevaEditorProps> = (props) => {
               <>
                 {props.onRenderEdit(props.item)}
                 {!props.hideMetaData && (
-                  <TulevaMetaData item={props.item}></TulevaMetaData>
+                  <TulevaMetaData
+                    item={props.item}
+                    labelCreated={props.labelCreated}
+                    labelModified={props.labelModified}
+                    labelCreatedby={props.labelCreatedby}
+                    labelModifiedby={props.labelModifiedby}
+                  ></TulevaMetaData>
                 )}
               </>
             )}
