@@ -58,6 +58,20 @@ export interface ITulevaPageProps {
   editorTitle?: string;
   onRenderEditorCaption?: (item: IBaseEntity) => React.ReactNode;
   wrappedButtons?: boolean;
+
+  labelYes?: string;
+  labelNo?: string;
+  labelSave?: string;
+  labelCancel?: string;
+  labelConfirmDelete?: string;
+  labelDeleteEntry?: string;
+  labelCopy?: string;
+  labelEdit?: string;
+
+  labelMetadataCreated?: string;
+  labelMetadataModified?: string;
+  labelMetadataCreatedby?: string;
+  labelMetadataModifiedby?: string;
 }
 
 const Header: React.FC<PartProps> = ({ children }) => <>{children}</>;
@@ -129,6 +143,18 @@ const TulevaPage: React.FC<ITulevaPageProps> = (props: ITulevaPageProps) => {
             editorTitle={props.editorTitle}
             onRenderEditorCaption={props.onRenderEditorCaption}
             wrapButtons={props.wrappedButtons ? props.wrappedButtons : false}
+            labelYes={props.labelYes}
+            labelNo={props.labelNo}
+            labelSave={props.labelSave}
+            labelCancel={props.labelCancel}
+            labelConfirmDelete={props.labelConfirmDelete}
+            labelDeleteEntry={props.labelDeleteEntry}
+            labelCopy={props.labelCopy}
+            labelEdit={props.labelEdit}
+            labelCreated={props.labelMetadataCreated}
+            labelModified={props.labelMetadataModified}
+            labelCreatedby={props.labelMetadataCreatedby}
+            labelModifiedby={props.labelMetadataModifiedby}
           ></TulevaEditor>
         </EditorContextProvider>
       </List.Item>
